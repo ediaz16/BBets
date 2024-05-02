@@ -141,4 +141,4 @@ print(c(lCI,uCI))
 
 <!--Explain and display the results of your method of coming up with the estimate of professor Brownlows betting profits!-->
 
-
+The graph shows Brownlow he is making less money on a bigger size class.
