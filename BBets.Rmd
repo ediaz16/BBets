@@ -42,18 +42,17 @@ In the class and payoff as described, what is the average earnings/losses?
 Find the standard deviation and a 95% confidence interval for their earnings
  
 ```{r}
-for (student in 20:30) {
-  winnings=BrLw(student,1,637)
-  print(paste(student, winnings))
+nSims=500
+saveResults= matrix(rep(0,nSims))
+for (i in 1:nSims){
+  saveResults[i] =BrLw(35,2,637)
 }
+hist(saveResults)
+
 ```
   
 ```{r}
-winnings=list()
-for (i in 1:500){
-winnings [i] = BrLw (35,2,637)
-}
-print(winnings)
+print (paste('mean profit=',round(mean(saveResults))))
 ```
   
   
@@ -61,15 +60,6 @@ print(winnings)
 
  
 ```{r}
-nSims=500
-saveResults= matrix(rep(0,nSims))
-# nSim simulations
-for(i in 1:nSims){  
-saveResults[i] = BrLw(35,2,637)  #historical did this 637 times
-}
-hist(saveResults)
-print(paste('mean profit= ', round(mean(saveResults))))
-
 sortedResults = sort(saveResults)
 #95% confidence interval
 lCI = ceiling(sortedResults[0.025*nSims])
@@ -79,8 +69,26 @@ print('95% Confidence Interval, average earnings/losses')
 print(c(lCI,uCI))
 
 ```
+
+```{r}
+sdev=sd(saveResults)
+print(paste("sd=",round(sdev,2)))
+```
+
+The mean profit as shown on thr graph is around 281.
+
 # What are the fair odds? Use manipulation of odds in the function to tune Brownlows earnings to zero. 
 
+```{r}
+nSims=500
+saveResults= matrix(rep(0,nSims))
+# nSim simulations
+for (i in 1:nSims){
+  saveResults [i] = BrLw(35,4.25,637)
+  #historical did this 637 times
+}
+hist(saveResults)
+```
 
 <!--Decide on your methods:  In this section explain the approach you will take to attack the issue --- how will you decide on a likely estimate of professor Brownlow's earnings or losses after 637 bets. Also explain how you construct a 95% confidence interval about your estimate of his winnings !-->
 
